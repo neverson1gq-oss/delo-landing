@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Дело — подработка и небольшие задачи</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #FAF6F0;
+      --bg-card: #F5EFE6;
+      --bg-card-hover: #EFE6D8;
+      --text-main: #3D3231;
+      --text-muted: #7A6C6B;
+      --accent: #D97757;
+      --accent-hover: #C56546;
+      --border-color: #E3D7C7;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+    }
+    .warm-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 30px -10px rgba(74, 62, 61, 0.05);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-accent {
+      background-color: var(--accent);
+      color: #FFFFFF;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 20px -6px rgba(217, 119, 87, 0.35);
+    }
+    .btn-accent:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px -6px rgba(217, 119, 87, 0.5);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased">
+
+  <!-- ХЕДЕР -->
+  <header class="w-full border-b border-[#E3D7C7] bg-[#FAF6F0]/90 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-[#D97757] text-white flex items-center justify-center font-extrabold text-lg">Д</div>
+        <span class="font-bold text-xl text-[#3D3231] tracking-tight">Дело</span>
+      </div>
+      <a href="https://neverson1gq-oss.github.io/podrabotka/" class="btn-accent text-xs font-bold px-4 py-2.5 rounded-xl flex items-center gap-1.5">
+        <span>Перейти на сайт</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- 1. ПЕРВЫЙ ЭКРАН -->
+  <section class="w-full py-12 md:py-20 px-4 flex flex-col justify-center min-h-[calc(100vh-73px)]">
+    <div class="max-w-5xl mx-auto w-full">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFE3D3] text-[#8C4A33] text-xs font-semibold mb-6">
+        <span>Умная платформа для задач и подработки</span>
+      </div>
+
+      <!-- Заголовок: 7 слов -->
+      <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#3D3231] mb-5 leading-[1.12] max-w-3xl">
+        Зарабатывай первые деньги в свободное от учёбы время
+      </h1>
+
+      <!-- Подзаголовок: 12 слов -->
+      <p class="text-lg sm:text-xl text-[#7A6C6B] mb-8 max-w-2xl font-normal leading-relaxed">
+        Платформа соединяет школьников и студентов с заказчиками для быстрого выполнения небольших задач.
+      </p>
+
+      <!-- Кнопка: 3 слова с глаголом -->
+      <div class="mb-6">
+        <a href="https://neverson1gq-oss.github.io/podrabotka/" class="btn-accent inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-extrabold text-base w-full sm:w-auto">
+          <span>Перейти на сайт</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+
+      <!-- Доказательство: ровно 1 строка -->
+      <div class="flex items-center gap-2 text-sm text-[#7A6C6B] font-medium">
+        <svg class="w-4 h-4 text-[#2D8A62] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+        <span>93% подростков хотят заработать личные деньги, а комиссия платформы составляет 10%.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ИНТЕРАКТИВНАЯ СТАТИСТИКА -->
+  <section class="py-16 border-t border-[#E3D7C7] bg-[#F5EFE6]">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="mb-10 text-center sm:text-left">
+        <span class="text-xs font-bold text-[#D97757] tracking-wider uppercase">Анализ рынка и социология</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#3D3231] mt-1">Почему подростки ищут работу?</h2>
+        <p class="text-[#7A6C6B] text-sm mt-1">Данные опросов среди учащейся молодёжи в возрасте 14–20 лет.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div class="bg-[#FAF6F0] p-6 rounded-2xl border border-[#E3D7C7]">
+          <h3 class="font-bold text-base mb-4 text-[#3D3231]">Главные мотивы поиска подработки:</h3>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span>Личные карманные расходы</span>
+                <span class="text-[#D97757]">52%</span>
+              </div>
+              <div class="w-full h-2.5 bg-[#EFE6D8] rounded-full overflow-hidden">
+                <div class="h-full bg-[#D97757] rounded-full" style="width: 52%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span>Первый практический опыт</span>
+                <span class="text-[#D97757]">28%</span>
+              </div>
+              <div class="w-full h-2.5 bg-[#EFE6D8] rounded-full overflow-hidden">
+                <div class="h-full bg-[#D97757] rounded-full" style="width: 28%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span>Оплата курсов и хобби</span>
+                <span class="text-[#D97757]">13%</span>
+              </div>
+              <div class="w-full h-2.5 bg-[#EFE6D8] rounded-full overflow-hidden">
+                <div class="h-full bg-[#D97757] rounded-full" style="width: 13%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span>Помощь семье</span>
+                <span class="text-[#D97757]">7%</span>
+              </div>
+              <div class="w-full h-2.5 bg-[#EFE6D8] rounded-full overflow-hidden">
+                <div class="h-full bg-[#D97757] rounded-full" style="width: 7%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="warm-card p-5 rounded-2xl">
+            <h4 class="font-bold text-base text-[#3D3231]">9 из 10 старшеклассников задумывались о работе</h4>
+            <p class="text-xs text-[#7A6C6B] mt-2 leading-relaxed">
+              Основной барьер — жёсткий график и отсутствие предложений с почасовой оплатой. Наш сервис предлагает выполнять небольшие поручения в свободные часы.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="p-4 bg-[#FAF6F0] border border-[#E3D7C7] rounded-xl text-center">
+              <div class="text-2xl font-black text-[#D97757]">2-4 часа</div>
+              <div class="text-xs text-[#7A6C6B] mt-1">Среднее свободное время в день</div>
+            </div>
+            <div class="p-4 bg-[#FAF6F0] border border-[#E3D7C7] rounded-xl text-center">
+              <div class="text-2xl font-black text-[#D97757]">500-2000 ₽</div>
+              <div class="text-xs text-[#7A6C6B] mt-1">Доход за одно выполнение</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ИНТЕГРАЦИЯ НЕЙРОСЕТИ -->
+  <section class="py-16 border-t border-[#E3D7C7]">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="bg-[#F5EFE6] border border-[#E3D7C7] rounded-3xl p-8 sm:p-10 relative overflow-hidden">
+        <div class="max-w-2xl relative z-10">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#EFE3D3] text-[#8C4A33] text-xs font-bold mb-4">
+            <span>🤖 Умный подбор задач</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-[#3D3231] mb-3">
+            Встроенная нейросеть рассчитает свободные слоты
+          </h2>
+          <p class="text-[#7A6C6B] text-sm sm:text-base leading-relaxed mb-6">
+            Алгоритм анализирует расписание уроков или лекций, строит подходящие временные окна и рекомендует только те заказы, которые подходят под ваши навыки, местоположение и график.
+          </p>
+          
+          <div class="space-y-3">
+            <div class="flex items-center gap-3 bg-[#FAF6F0] p-3 rounded-xl border border-[#E3D7C7]">
+              <span class="w-7 h-7 rounded-lg bg-[#D97757]/15 text-[#D97757] flex items-center justify-center font-bold text-xs">1</span>
+              <span class="text-xs font-semibold text-[#3D3231]">Умный поиск совпадений по времени учёбы и подработки</span>
+            </div>
+            <div class="flex items-center gap-3 bg-[#FAF6F0] p-3 rounded-xl border border-[#E3D7C7]">
+              <span class="w-7 h-7 rounded-lg bg-[#D97757]/15 text-[#D97757] flex items-center justify-center font-bold text-xs">2</span>
+              <span class="text-xs font-semibold text-[#3D3231]">Персональные рекомендации заказов на основе опыта</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. КАК ЭТО РАБОТАЕТ -->
+  <section class="py-16 border-t border-[#E3D7C7] bg-[#F5EFE6]">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <span class="text-xs font-bold text-[#D97757] tracking-wider uppercase">Понятный путь</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#3D3231] mt-1">Как это работает</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-[#FAF6F0] p-6 rounded-2xl border border-[#E3D7C7]">
+          <div class="w-10 h-10 rounded-xl bg-[#D97757] text-white flex items-center justify-center font-extrabold mb-4">1</div>
+          <h3 class="font-bold text-lg text-[#3D3231] mb-2">Создай профиль</h3>
+          <p class="text-xs text-[#7A6C6B] leading-relaxed">Зарегистрируйся на сайте и укажи свои навыки или опиши задачу, которую нужно решить.</p>
+        </div>
+
+        <div class="bg-[#FAF6F0] p-6 rounded-2xl border border-[#E3D7C7]">
+          <div class="w-10 h-10 rounded-xl bg-[#D97757] text-white flex items-center justify-center font-extrabold mb-4">2</div>
+          <h3 class="font-bold text-lg text-[#3D3231] mb-2">Согласуй детали</h3>
+          <p class="text-xs text-[#7A6C6B] leading-relaxed">Используй подбор нейросети, чтобы выбрать подходящее задание с фиксированной оплатой.</p>
+        </div>
+
+        <div class="bg-[#FAF6F0] p-6 rounded-2xl border border-[#E3D7C7]">
+          <div class="w-10 h-10 rounded-xl bg-[#D97757] text-white flex items-center justify-center font-extrabold mb-4">3</div>
+          <h3 class="font-bold text-lg text-[#3D3231] mb-2">Получи результат</h3>
+          <p class="text-xs text-[#7A6C6B] leading-relaxed">Заверши работу и получи выплату по правилам прозрачного расчёта сервиса.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ДЛЯ КОГО -->
+  <section class="py-16 border-t border-[#E3D7C7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <span class="text-xs font-bold text-[#D97757] tracking-wider uppercase">Целевая аудитория</span>
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#3D3231] mt-1 mb-6">Для кого создана платформа</h2>
+      
+      <div class="bg-[#F5EFE6] p-8 rounded-2xl border border-[#E3D7C7] text-left">
+        <p class="text-sm sm:text-base text-[#3D3231] leading-relaxed font-normal">
+          Платформа создана для школьников от 14 лет и студентов, которым необходим самостоятельный заработок без срыва учёбы, а также для заказчиков, заинтересованных в оперативной помощи с бытовыми, курьерскими или простыми цифровыми задачами.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. СКОЛЬКО СТОИТ -->
+  <section class="py-16 border-t border-[#E3D7C7] bg-[#F5EFE6]">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <span class="text-xs font-bold text-[#D97757] tracking-wider uppercase">Прозрачные условия</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#3D3231] mt-1">Сколько стоит</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        <div class="bg-[#FAF6F0] p-6 rounded-2xl border border-[#E3D7C7]">
+          <h3 class="font-bold text-base text-[#3D3231] mb-1">Заказчик</h3>
+          <div class="text-2xl font-extrabold text-[#D97757] my-2">Бюджет задачи</div>
+          <p class="text-xs text-[#7A6C6B] leading-relaxed">Оплачивает ровно ту сумму, которая была установлена при публикации задания. Никаких скрытых сборов над стоимостью.</p>
+        </div>
+
+        <div class="bg-[#FAF6F0] p-6 rounded-2xl border border-[#E3D7C7]">
+          <h3 class="font-bold text-base text-[#3D3231] mb-1">Исполнитель</h3>
+          <div class="text-2xl font-extrabold text-[#D97757] my-2">90% от суммы</div>
+          <p class="text-xs text-[#7A6C6B] leading-relaxed">Получает выплату за работу. Комиссия платформы составляет 10% за обеспечение безопасности сделки и подбор заказов.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. ПРИЗЫВ К ДЕЙСТВИЮ -->
+  <section class="py-20 border-t border-[#E3D7C7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-[#3D3231] mb-4">Начни работу с сервисом</h2>
+      <p class="text-[#7A6C6B] text-base mb-8 max-w-lg mx-auto">
+        Открой сайт, чтобы опубликовать первое задание или найти подработку на сегодня.
+      </p>
+
+      <a href="https://neverson1gq-oss.github.io/podrabotka/" class="btn-accent inline-flex items-center justify-center gap-2 px-10 py-4 rounded-xl font-extrabold text-base">
+        <span>Перейти на сайт</span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ФУТЕР -->
+  <footer class="w-full border-t border-[#E3D7C7] py-6 bg-[#F5EFE6]">
+    <div class="max-w-5xl mx-auto px-4 text-center text-xs text-[#7A6C6B]">
+      © Дело — сервис поиска подработки и задач.
+    </div>
+  </footer>
+
+</body>
+</html>
