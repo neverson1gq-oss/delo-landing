@@ -6,6 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Дело — платформа задач и подработки для всех</title>
   <meta name="description" content="Дело — платформа, где заказы находят людей. Подработка и небольшие задачи для всех: взрослых и подростков от 14 лет. Комиссия 10%, оплата после подтверждения обеими сторонами.">
+  <meta property="og:title" content="Дело — платформа задач и подработки для всех">
+  <meta property="og:description" content="Публикуйте задачи или выполняйте их: для взрослых и подростков от 14 лет. Комиссия 10%, оплата после подтверждения обеими сторонами.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://neverson1gq-oss.github.io/delo-landing/">
+  <meta property="og:image" content="https://neverson1gq-oss.github.io/delo-landing/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -369,6 +374,78 @@
     .footer-links a { color: var(--text-muted); transition: color var(--transition); }
     .footer-links a:hover { color: var(--accent); }
 
+    /* ============ DEMO PHONE ============ */
+    .demo-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+    .phone {
+      width: min(320px, 82vw); margin: 0 auto; padding: 12px;
+      border: 1px solid var(--border-strong); border-radius: 40px;
+      background: linear-gradient(160deg, #2A1B0C, #120C06);
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,0.7), inset 0 1px 0 rgba(243,233,219,0.08);
+    }
+    .phone-screen {
+      border-radius: 30px; overflow: hidden; position: relative;
+      background: linear-gradient(180deg, #1A120A, #100A05);
+      height: 540px; border: 1px solid rgba(217,160,91,0.1);
+    }
+    .phone-notch { width: 96px; height: 20px; border-radius: 999px; background: #050302; margin: 10px auto 4px; }
+    .phone-bar { display: flex; align-items: center; gap: 0.5rem; padding: 8px 16px 12px; }
+    .phone-bar .dot { width: 22px; height: 22px; border-radius: 7px; background: linear-gradient(135deg, #E3AE6A, #C97B3D); color: #1E1305; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 13px; font-weight: 600; }
+    .phone-bar b { font-size: 13px; }
+    .screen-slide {
+      position: absolute; inset: 0; padding: 84px 16px 16px;
+      opacity: 0; transform: translateX(26px);
+      transition: opacity 500ms ease, transform 500ms cubic-bezier(0.16,1,0.3,1);
+    }
+    .screen-slide.active { opacity: 1; transform: none; }
+    .sl-label { font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 8px; }
+    .sl-card {
+      background: rgba(36,26,15,0.85); border: 1px solid var(--border);
+      border-radius: 16px; padding: 14px; margin-bottom: 10px;
+    }
+    .sl-card b { font-size: 14px; display: block; }
+    .sl-card .meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .sl-card .price { font-family: var(--font-display); font-size: 20px; color: var(--accent); margin-top: 8px; }
+    .sl-chip { font-size: 11px; font-weight: 800; color: #1E1305; background: linear-gradient(135deg,#E3AE6A,#C97B3D); border-radius: 999px; padding: 7px 14px; display: inline-flex; align-items: center; gap: 5px; }
+    .sl-row { display: flex; align-items: center; gap: 10px; background: rgba(36,26,15,0.85); border: 1px solid var(--border); border-radius: 14px; padding: 10px 12px; margin-bottom: 8px; }
+    .sl-row .ava { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(145deg,#2E1F0E,#1B120A); border: 1px solid var(--border-strong); color: var(--accent); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 13px; flex-shrink: 0; }
+    .sl-row b { font-size: 13px; }
+    .sl-row span { font-size: 11px; color: var(--text-muted); display: block; }
+    .sl-row.picked { border-color: var(--accent); background: var(--accent-soft); }
+    .sl-ok { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--success); background: rgba(143,191,154,0.08); border: 1px solid rgba(143,191,154,0.25); border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; }
+    .sl-big { font-family: var(--font-display); font-size: 34px; color: var(--accent); }
+    .demo-steps { display: grid; gap: var(--space-3); }
+    .demo-step {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1rem 1.2rem; border: 1px solid var(--border); border-radius: 14px;
+      background: rgba(28,20,12,0.5); transition: border-color var(--transition), background var(--transition);
+    }
+    .demo-step.on { border-color: var(--border-strong); background: rgba(36,26,15,0.75); }
+    .demo-step .n { width: 26px; height: 26px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; background: var(--accent-soft); color: var(--accent); border: 1px solid var(--border-strong); }
+    .demo-step.on .n { background: linear-gradient(135deg,#E3AE6A,#C97B3D); color: #1E1305; }
+    .demo-step b { font-size: var(--text-sm); display: block; }
+    .demo-step span { font-size: var(--text-xs); color: var(--text-muted); }
+
+    /* ============ FAQ ============ */
+    .faq { display: grid; gap: var(--space-3); max-width: 780px; margin: 0 auto; }
+    .faq details { border: 1px solid var(--border); border-radius: 16px; background: linear-gradient(170deg, rgba(36,26,15,0.65), rgba(27,18,9,0.8)); overflow: hidden; }
+    .faq summary {
+      cursor: pointer; padding: 1.05rem 1.3rem; font-weight: 700; font-size: var(--text-base);
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem; list-style: none;
+      transition: color var(--transition);
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; line-height: 1; font-weight: 400; }
+    .faq details[open] summary::after { content: "\2212"; }
+    .faq details[open] summary { border-bottom: 1px solid var(--border); }
+    .faq .faq-body { padding: 0.95rem 1.3rem 1.1rem; color: var(--text-muted); font-size: var(--text-sm); line-height: 1.6; }
+    .faq .faq-body a { color: var(--accent); }
+
+    /* ============ CONTACT ============ */
+    .contact-panel { text-align: center; padding: clamp(2rem, 5vw, 3rem); margin-top: clamp(2.5rem, 6vw, 4rem); }
+    .contact-panel h3 { font-size: var(--text-lg); margin-bottom: 0.6rem; }
+    .contact-panel p { font-size: var(--text-sm); color: var(--text-muted); max-width: 460px; margin: 0 auto var(--space-6); }
+    .contact-panel .tg-ico { width: 56px; height: 56px; margin: 0 auto var(--space-4); border-radius: 16px; background: var(--accent-soft); border: 1px solid var(--border-strong); display: flex; align-items: center; justify-content: center; color: var(--accent); }
+
     /* ============ REVEAL ============ */
     .reveal { transition: opacity 700ms ease, transform 700ms cubic-bezier(0.16, 1, 0.3, 1); }
     html.js .reveal { opacity: 0; transform: translateY(26px); }
@@ -376,7 +453,7 @@
 
     /* ============ RESPONSIVE ============ */
     @media (max-width: 900px) {
-      .hero-grid, .survey-grid, .ai-panel, .calc-grid { grid-template-columns: 1fr; }
+      .hero-grid, .survey-grid, .ai-panel, .calc-grid, .demo-grid { grid-template-columns: 1fr; }
       .how-grid, .audience-grid { grid-template-columns: 1fr; }
       .benefits-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
@@ -409,7 +486,9 @@
       <span class="nav-links">
         <a href="#benefits">Преимущества</a>
         <a href="#how">Как работает</a>
+        <a href="#demo">Демо</a>
         <a href="#compare">Сравнение</a>
+        <a href="#faq">Вопросы</a>
         <a href="#team">Команда</a>
       </span>
       <a class="btn btn-gold header-cta" href="https://neverson1gq-oss.github.io/podrabotka/" aria-label="Перейти на сайт">
@@ -594,6 +673,74 @@
   </div>
 </section>
 
+<!-- ДЕМО -->
+<section class="sec" id="demo">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="kicker">Демо</span>
+      <h2 class="sec-title">Так выглядит заказ</h2>
+      <p class="sec-sub">Схема из приложения: от публикации задачи до выплаты. Расчёт показан на примере задачи за 1 000 ₽.</p>
+    </div>
+    <div class="demo-grid">
+      <div class="phone reveal" aria-hidden="true">
+        <div class="phone-screen">
+          <div class="phone-notch"></div>
+          <div class="phone-bar"><span class="dot">Д</span><b>Дело</b></div>
+          <div class="screen-slide active">
+            <div class="sl-label">Новый заказ</div>
+            <div class="sl-card">
+              <b>Погулять с собакой</b>
+              <div class="meta">Завтра, 7:00 · 30 минут · рядом</div>
+              <div class="price">1 000 ₽</div>
+              <div style="margin-top:10px"><span class="sl-chip">Откликнуться · 2 отклика</span></div>
+            </div>
+          </div>
+          <div class="screen-slide">
+            <div class="sl-label">Отклики</div>
+            <div class="sl-row"><span class="ava">А</span><div><b>Аня</b><span>★ 4.9 · 12 дел · рядом</span></div></div>
+            <div class="sl-row picked"><span class="ava">А</span><div><b>Выбрана Аня</b><span>договорились: завтра в 7:00</span></div></div>
+          </div>
+          <div class="screen-slide">
+            <div class="sl-label">Выполнено</div>
+            <div class="sl-card">
+              <b>Погулять с собакой</b>
+              <div class="meta">Аня выложила фото из прогулки</div>
+            </div>
+            <div class="sl-ok"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Заказчик подтвердил</div>
+            <div class="sl-ok"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Исполнитель подтвердил</div>
+          </div>
+          <div class="screen-slide">
+            <div class="sl-label">Выплата</div>
+            <div class="sl-card" style="text-align:center;padding:22px 14px">
+              <b>Аня получила</b>
+              <div class="sl-big">900 ₽</div>
+              <div class="meta" style="margin-top:6px">комиссия платформы 10% — 100 ₽</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="demo-steps reveal">
+        <div class="demo-step">
+          <span class="n">1</span>
+          <div><b>Заказчик публикует задачу</b><span>Например: «Погулять с собакой, завтра в 7:00, 1 000 ₽». Публикация бесплатна.</span></div>
+        </div>
+        <div class="demo-step">
+          <span class="n">2</span>
+          <div><b>Исполнители откликаются</b><span>Отклик бесплатный. Заказчик выбирает одного по рейтингу и отзывам.</span></div>
+        </div>
+        <div class="demo-step">
+          <span class="n">3</span>
+          <div><b>Обе стороны подтверждают результат</b><span>Заказчик видит результат, исполнитель — отметку о выполнении. Только после этого проходит оплата.</span></div>
+        </div>
+        <div class="demo-step">
+          <span class="n">4</span>
+          <div><b>Исполнитель получает выплату</b><span>Из 1 000 ₽ — 900 ₽ на счёт. Комиссия платформы 10% покрывает подбор заказов и поддержку.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ПРЕИМУЩЕСТВА -->
 <section class="sec" id="benefits">
   <div class="wrap">
@@ -771,6 +918,54 @@
   </div>
 </section>
 
+<!-- ВОПРОСЫ И СВЯЗЬ -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="kicker">Частые вопросы</span>
+      <h2 class="sec-title">Вопросы и ответы</h2>
+      <p class="sec-sub">Коротко о главном — а если не нашли ответ, напишите нам.</p>
+    </div>
+    <div class="faq reveal">
+      <details>
+        <summary>С какого возраста можно работать на платформе?</summary>
+        <div class="faq-body">С 14 лет. Подростки 14–17 лет выполняют задачи с учётом требований о занятости несовершеннолетних — на простые и безопасные поручения рядом с домом, в свободное от учёбы время.</div>
+      </details>
+      <details>
+        <summary>Сколько берёт платформа?</summary>
+        <div class="faq-body">Комиссия — 10% с исполнителя за выполненную работу. Заказчик платит ровно бюджет задачи, без скрытых сборов сверху. Например, из задачи за 1 000 ₽ исполнитель получает 900 ₽.</div>
+      </details>
+      <details>
+        <summary>Когда исполнитель получает деньги?</summary>
+        <div class="faq-body">После того, как и заказчик, и исполнитель подтвердят выполнение. Это двойное подтверждение защищает обе стороны: заказчик платит за результат, исполнитель — точно получает выплату.</div>
+      </details>
+      <details>
+        <summary>Нужно ли платить за отклики?</summary>
+        <div class="faq-body">Нет. В отличие от крупных бирж, где исполнители покупают пакеты откликов, у нас отклики бесплатны — платформа зарабатывает только процент с выполненных дел.</div>
+      </details>
+      <details>
+        <summary>Что сейчас работает в демо-режиме?</summary>
+        <div class="faq-body">Сейчас при регистрации начисляются 5 000 демо-рублей — это виртуальный баланс, чтобы протестировать сделки от начала до конца. Мы честно об этом пишем: платформа молодая и развивается.</div>
+      </details>
+      <details>
+        <summary>А если возник спор по заказу?</summary>
+        <div class="faq-body">Напишите нам в <a href="https://t.me/goIdface" target="_blank" rel="noopener">Telegram</a> — разберёмся лично. Мы маленькая команда, поэтому отвечаем сами и быстро.</div>
+      </details>
+    </div>
+    <div class="panel contact-panel reveal">
+      <div class="tg-ico" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg>
+      </div>
+      <h3>Остались вопросы?</h3>
+      <p>Напишите команде напрямую — отвечаем сами, без ботов.</p>
+      <a class="btn btn-gold btn-lg" href="https://t.me/goIdface" target="_blank" rel="noopener">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg>
+        Написать в Telegram
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ДЛЯ КОГО -->
 <section class="sec" id="audience">
   <div class="wrap">
@@ -943,6 +1138,24 @@
     });
   });
 
+  /* Demo phone autoplay */
+  var slides = document.querySelectorAll('.screen-slide');
+  var dsteps = document.querySelectorAll('.demo-step');
+  if (slides.length) {
+    var di = 0;
+    function dgo(n) {
+      slides.forEach(function (s, i) { s.classList.toggle('active', i === n); });
+      dsteps.forEach(function (s, i) { s.classList.toggle('on', i === n); });
+    }
+    dgo(0);
+    if (!reduced) {
+      setInterval(function () {
+        di = (di + 1) % slides.length;
+        dgo(di);
+      }, 3400);
+    }
+  }
+
   /* Calculator */
   var slider = document.getElementById('budget');
   var feeEl = document.getElementById('fee');
@@ -970,445 +1183,5 @@
   }
 })();
 </script>
-<script data-pplx-inline-edit>
-(function () {
-  if (window === window.top) return;
-
-  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
-  const MAX_FONT_BYTES = 500 * 1024;
-  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
-  const DEFAULT_LINE_HEIGHT = 16;
-  let scrollForwarding = false;
-  let scrollRaf = 0;
-  let trustedTopOrigin = null;
-
-  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
-  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
-  // across multiple labels.
-  function matchesAllowedOrigin(origin) {
-    if (!origin) return false;
-    for (const entry of allowedParentOrigins) {
-      if (!entry.includes("*")) {
-        if (entry === origin) return true;
-        continue;
-      }
-      const pattern = new RegExp(
-        "^" +
-          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
-          "$",
-      );
-      if (pattern.test(origin)) return true;
-    }
-    return false;
-  }
-
-  // Trust decision: when the sender is same-origin-visible (event.origin is a
-  // real origin like https://www.perplexity.ai) we trust event.origin directly.
-  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
-  // broker's stamped `parentOrigin` to identify the top window. The fallback
-  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
-  // on the response path (see postToTrustedTop) to ensure replies can't be
-  // delivered to anyone but the actual top window of that claimed origin.
-  function getTrustedParentOrigin(event) {
-    const forwardedParentOrigin =
-      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
-    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
-    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
-  }
-
-  // All responses go to window.top with targetOrigin = the allowlisted origin.
-  // An attacker that iframes us inside their own null-origin broker can claim
-  // any parentOrigin they like, but the browser will drop the reply whenever
-  // the real top's origin doesn't match — so the screenshot never leaves.
-  function postToTrustedTop(message) {
-    if (!trustedTopOrigin) return;
-    try {
-      window.top.postMessage(message, trustedTopOrigin);
-    } catch (_error) {}
-  }
-
-  const PICK_CAPABILITIES = ["pick"];
-  const PICK_CHAIN_LENGTH = 4;
-  const PICK_MAX_TEXT_CHARS = 120;
-  const PICK_MAX_HTML_CHARS = 300;
-
-  function truncate(value, maxChars) {
-    return value.length > maxChars ? value.slice(0, maxChars - 1) + "…" : value;
-  }
-
-  function isPickableElement(element) {
-    return (
-      element instanceof Element &&
-      element !== document.documentElement &&
-      element !== document.body
-    );
-  }
-
-  function resolvePickTarget(x, y) {
-    if (!Number.isFinite(x) || !Number.isFinite(y)) return null;
-    const element = document.elementFromPoint(x, y);
-    return isPickableElement(element) ? element.closest("svg") || element : null;
-  }
-
-  function pickLabel(element) {
-    if (element.id) return element.localName + "#" + element.id;
-    return [element.localName].concat(Array.from(element.classList).slice(0, 2)).join(".");
-  }
-
-  // Only attributes that help find the element in source. data-* values and URL
-  // query strings or fragments can carry tokens.
-  const PICK_ATTRIBUTES = new Set([
-    "id",
-    "class",
-    "name",
-    "type",
-    "role",
-    "alt",
-    "aria-label",
-    "href",
-    "src",
-  ]);
-
-  function pickAttributeValue(attribute) {
-    return attribute.name === "href" || attribute.name === "src"
-      ? attribute.value.split(/[?#]/)[0]
-      : attribute.value;
-  }
-
-  function describePickElement(element) {
-    const chain = [];
-    for (
-      let current = element;
-      isPickableElement(current) && chain.length < PICK_CHAIN_LENGTH;
-      current = current.parentElement
-    ) {
-      chain.unshift(current);
-    }
-    const attributes = Array.from(element.attributes)
-      .filter((attribute) => PICK_ATTRIBUTES.has(attribute.name))
-      .map((attribute) => ` ${attribute.name}="${pickAttributeValue(attribute).replace(/"/g, "&quot;")}"`)
-      .join("");
-    const text = (element.innerText || element.textContent || "").replace(/\s+/g, " ").trim();
-    return {
-      chain: chain.map(pickLabel),
-      html: truncate(`<${element.localName}${attributes}>`, PICK_MAX_HTML_CHARS),
-      text: text ? truncate(text, PICK_MAX_TEXT_CHARS) : undefined,
-    };
-  }
-
-  // Hover asks once per frame, and innerText on a large section forces layout,
-  // so only the rect is re-read while the pointer stays on the same element.
-  // Clicks ask for fresh details since the page may have changed the element.
-  let lastPick = null;
-
-  function describePickTarget(element, fresh) {
-    if (fresh || lastPick?.element !== element) {
-      lastPick = { element, details: describePickElement(element) };
-    }
-    const rect = element.getBoundingClientRect();
-    return {
-      rect: { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
-      ...lastPick.details,
-    };
-  }
-
-  function inlineAll(original, clone) {
-    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
-
-    try {
-      const computedStyle = getComputedStyle(original);
-      // cssText on a computed style is the serialized declaration in modern
-      // Chromium/Safari — a single read beats enumerating ~400 longhand
-      // properties. Firefox returns "" here, so we fall back on empty.
-      const serialized = computedStyle.cssText;
-      if (serialized) {
-        clone.style.cssText = serialized;
-      } else {
-        const parts = new Array(computedStyle.length);
-        for (let index = 0; index < computedStyle.length; index += 1) {
-          const property = computedStyle[index];
-          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
-        }
-        clone.style.cssText = parts.join("");
-      }
-    } catch (_error) {}
-
-    const originalChildren = original.children;
-    const clonedChildren = clone.children;
-    for (
-      let index = 0;
-      index < originalChildren.length && index < clonedChildren.length;
-      index += 1
-    ) {
-      inlineAll(originalChildren[index], clonedChildren[index]);
-    }
-  }
-
-  function extractFontUrl(srcValue) {
-    const matches = [
-      ...srcValue.matchAll(
-        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
-      ),
-    ];
-    if (matches.length === 0) return null;
-    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
-    if (woff2) return woff2[1];
-    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
-    if (woff) return woff[1];
-    return matches[0][1];
-  }
-
-  // Cache resolved font URL -> data URI across captures. Fonts on a page
-  // essentially never change, and a batch run emits multiple captures back to
-  // back — without this we'd refetch + re-base64 every time.
-  const fontDataUriCache = new Map();
-  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
-
-  async function fetchAsDataUri(url) {
-    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
-    let dataUri = null;
-    try {
-      const response = await fetch(url, { mode: "cors", credentials: "omit" });
-      if (response.ok) {
-        const blob = await response.blob();
-        if (blob.size <= MAX_FONT_BYTES) {
-          dataUri = await new Promise((resolve) => {
-            const reader = new FileReader();
-            reader.onloadend = () =>
-              resolve(typeof reader.result === "string" ? reader.result : null);
-            reader.onerror = () => resolve(null);
-            reader.readAsDataURL(blob);
-          });
-        }
-      }
-    } catch (_error) {
-      dataUri = null;
-    }
-    fontDataUriCache.set(url, dataUri);
-    return dataUri;
-  }
-
-  function collectFontFaceRuleTexts() {
-    const rules = [];
-    for (const sheet of document.styleSheets) {
-      let cssRules;
-      try {
-        cssRules = sheet.cssRules;
-      } catch (_error) {
-        continue;
-      }
-      if (!cssRules) continue;
-      for (const rule of cssRules) {
-        const cssText = rule.cssText || "";
-        if (cssText.startsWith("@font-face")) rules.push(cssText);
-      }
-    }
-    return rules;
-  }
-
-  async function buildInlinedFontCss() {
-    const ruleTexts = collectFontFaceRuleTexts();
-    if (ruleTexts.length === 0) return null;
-
-    const resolved = ruleTexts.map((cssText) => {
-      if (!SRC_DECLARATION_RE.test(cssText)) return null;
-      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
-      if (!srcMatch) return null;
-      const url = extractFontUrl(srcMatch[1]);
-      if (!url) return null;
-      try {
-        return { cssText, url: new URL(url, document.baseURI).href };
-      } catch (_error) {
-        return null;
-      }
-    });
-
-    const dataUris = await Promise.all(
-      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
-    );
-
-    const inlined = [];
-    let totalBytes = 0;
-    for (let index = 0; index < resolved.length; index += 1) {
-      const entry = resolved[index];
-      const dataUri = dataUris[index];
-      if (!entry || !dataUri) continue;
-      const approxBytes = dataUri.length * 0.75;
-      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
-      totalBytes += approxBytes;
-      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
-    }
-    return inlined.length > 0 ? inlined.join("\n") : null;
-  }
-
-  function stripExternal(clone) {
-    const images = clone.querySelectorAll("img");
-    for (let index = 0; index < images.length; index += 1) {
-      const src = images[index].getAttribute("src");
-      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
-    }
-
-    const elements = clone.querySelectorAll("*");
-    for (let index = 0; index < elements.length; index += 1) {
-      const style = elements[index].style.cssText;
-      if (style && style.includes("url(")) {
-        elements[index].style.cssText = style.replace(
-          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
-          "none",
-        );
-      }
-    }
-  }
-
-  function emitScroll() {
-    scrollRaf = 0;
-    if (!scrollForwarding) return;
-    postToTrustedTop({
-      type: "INLINE_EDIT_SCROLL",
-      scrollX: window.scrollX,
-      scrollY: window.scrollY,
-      capabilities: PICK_CAPABILITIES,
-    });
-  }
-
-  window.addEventListener(
-    "scroll",
-    function () {
-      if (!scrollForwarding || scrollRaf) return;
-      scrollRaf = requestAnimationFrame(emitScroll);
-    },
-    { passive: true, capture: true },
-  );
-
-  async function handleCaptureRequest(event) {
-    const requestId = event.data.requestId;
-    const scrollX = window.scrollX;
-    const scrollY = window.scrollY;
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-
-    function postResult(dataUrl) {
-      postToTrustedTop({
-        type: "INLINE_EDIT_SCREENSHOT_RESULT",
-        requestId,
-        dataUrl,
-        scrollX,
-        scrollY,
-      });
-    }
-
-    try {
-      // Wait for any pending web fonts to resolve so both inline metrics and
-      // the @font-face inlining below see the same loaded faces.
-      if (document.fonts && document.fonts.ready) {
-        try {
-          await document.fonts.ready;
-        } catch (_error) {}
-      }
-
-      const clone = document.documentElement.cloneNode(true);
-      inlineAll(document.documentElement, clone);
-
-      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
-      for (let index = 0; index < removedNodes.length; index += 1) {
-        removedNodes[index].remove();
-      }
-
-      stripExternal(clone);
-
-      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
-      // can resolve them — external font URLs aren't fetched during
-      // foreignObject rendering, which would otherwise force a fallback face
-      // and change text metrics.
-      const inlinedFontCss = await buildInlinedFontCss();
-      if (inlinedFontCss) {
-        const styleEl = document.createElement("style");
-        styleEl.textContent = inlinedFontCss;
-        const head = clone.querySelector("head");
-        if (head) head.appendChild(styleEl);
-        else clone.insertBefore(styleEl, clone.firstChild);
-      }
-
-      const html = new XMLSerializer().serializeToString(clone);
-      const svg =
-        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
-        '<foreignObject width="100%" height="100%">' +
-        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
-        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
-        html +
-        "</div></div></foreignObject></svg>";
-      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-      const image = new Image();
-      image.onload = function () {
-        const canvas = document.createElement("canvas");
-        canvas.width = width;
-        canvas.height = height;
-        canvas.getContext("2d").drawImage(image, 0, 0);
-        postResult(canvas.toDataURL("image/png"));
-      };
-      image.onerror = function () {
-        postResult(null);
-      };
-      image.src = svgUrl;
-    } catch (_error) {
-      postResult(null);
-    }
-  }
-
-  window.addEventListener("message", function (event) {
-    if (!event.data) return;
-    // Only accept messages from the direct parent frame. Blocks sibling /
-    // unrelated-window postMessage senders that could otherwise reach us.
-    if (event.source !== window.parent) return;
-
-    const trustedParentOrigin = getTrustedParentOrigin(event);
-    if (!trustedParentOrigin) return;
-    trustedTopOrigin = trustedParentOrigin;
-
-    if (event.data.type === "INLINE_EDIT_PICK") {
-      const element = resolvePickTarget(event.data.x, event.data.y);
-      postToTrustedTop({
-        type: "INLINE_EDIT_PICK_RESULT",
-        seq: event.data.seq,
-        target: element ? describePickTarget(element, event.data.fresh === true) : null,
-      });
-      return;
-    }
-
-    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
-      scrollForwarding = true;
-      emitScroll();
-      return;
-    }
-
-    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
-      scrollForwarding = false;
-      if (scrollRaf) cancelAnimationFrame(scrollRaf);
-      scrollRaf = 0;
-      return;
-    }
-
-    if (event.data.type === "INLINE_EDIT_SCROLL_BY") {
-      const { deltaX, deltaY, deltaMode } = event.data;
-      if (!scrollForwarding || !Number.isFinite(deltaX) || !Number.isFinite(deltaY)) return;
-      if (deltaMode !== 0 && deltaMode !== 1 && deltaMode !== 2) return;
-      const lineHeight =
-        parseFloat(getComputedStyle(document.documentElement).lineHeight) || DEFAULT_LINE_HEIGHT;
-      const scaleX = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerWidth : 1;
-      const scaleY = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerHeight : 1;
-      // The selection overlay receives the wheel event instead of this iframe.
-      // Instant scrolling preserves trackpad deltas even on smooth-scroll sites.
-      window.scrollBy({ left: deltaX * scaleX, top: deltaY * scaleY, behavior: "instant" });
-      emitScroll();
-      return;
-    }
-
-    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
-
-    handleCaptureRequest(event);
-  });
-})();
-
-
-</script></body>
+</body>
 </html>
