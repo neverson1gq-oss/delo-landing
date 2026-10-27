@@ -1,294 +1,1414 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="no-js">
+<script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Дело — подработка и небольшие задачи</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Дело — платформа задач и подработки для всех</title>
+  <meta name="description" content="Дело — платформа, где заказы находят людей. Подработка и небольшие задачи для всех: взрослых и подростков от 14 лет. Комиссия 10%, оплата после подтверждения обеими сторонами.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231B120A'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='18' fill='%23D9A05B' text-anchor='middle'%3E%D0%94%3C/text%3E%3C/svg%3E">
   <style>
     :root {
-      --bg-main: #FAF6F0;
-      --bg-card: #F5EFE6;
-      --bg-card-hover: #EFE6D8;
-      --text-main: #3D3231;
-      --text-muted: #7A6C6B;
-      --accent: #D97757;
-      --accent-hover: #C56546;
-      --border-color: #E3D7C7;
+      --bg: #16100A;
+      --bg-2: #1C140C;
+      --card: #211709;
+      --card-2: #241A0F;
+      --card-solid: #1E1509;
+      --border: rgba(217, 160, 91, 0.16);
+      --border-strong: rgba(217, 160, 91, 0.32);
+      --text: #F3E9DB;
+      --text-muted: #C9B79B;
+      --text-faint: #A8967C;
+      --accent: #D9A05B;
+      --accent-2: #C97B3D;
+      --accent-soft: rgba(217, 160, 91, 0.12);
+      --success: #8FBF9A;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Manrope', 'Segoe UI', sans-serif;
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2.1rem, 1.4rem + 2.8vw, 3.6rem);
+      --space-4: 1rem; --space-6: 1.5rem; --space-8: 2rem;
+      --space-12: 3rem; --space-16: 4rem; --space-20: 5rem;
+      --transition: 220ms cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 18px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      -webkit-text-size-adjust: none; text-size-adjust: none;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth; scroll-padding-top: 90px;
     }
     body {
-      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      background-color: var(--bg-main);
-      color: var(--text-main);
+      min-height: 100dvh; line-height: 1.65;
+      font-family: var(--font-body); font-size: var(--text-base);
+      color: var(--text); background-color: var(--bg);
+      background-image:
+        radial-gradient(1100px 500px at 85% -5%, rgba(201, 123, 61, 0.10), transparent 60%),
+        radial-gradient(900px 480px at -10% 25%, rgba(217, 160, 91, 0.06), transparent 60%);
+      background-attachment: fixed;
     }
-    .warm-card {
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-color);
-      box-shadow: 0 10px 30px -10px rgba(74, 62, 61, 0.05);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    body::after {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.35;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
     }
-    .btn-accent {
-      background-color: var(--accent);
-      color: #FFFFFF;
-      transition: all 0.25s ease;
-      box-shadow: 0 8px 20px -6px rgba(217, 119, 87, 0.35);
+    img, svg { display: block; max-width: 100%; height: auto; }
+    h1, h2, h3 { text-wrap: balance; line-height: 1.15; font-family: var(--font-display); font-weight: 600; }
+    p, li { text-wrap: pretty; max-width: 68ch; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; background: none; border: none; font: inherit; color: inherit; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+    ::selection { background: rgba(217, 160, 91, 0.3); }
+
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 2.5rem); position: relative; z-index: 2; }
+    section { position: relative; z-index: 2; }
+
+    /* ============ HEADER ============ */
+    .header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(22, 16, 10, 0.82);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
     }
-    .btn-accent:hover {
-      background-color: var(--accent-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 25px -6px rgba(217, 119, 87, 0.5);
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.9rem clamp(1.25rem, 4vw, 2.5rem); }
+    .brand { display: flex; align-items: center; gap: 0.75rem; }
+    .brand-mark {
+      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+      background: linear-gradient(135deg, #2A1B0C, #1B120A);
+      border: 1px solid var(--border-strong);
+      box-shadow: inset 0 1px 0 rgba(243, 233, 219, 0.08), 0 8px 20px -8px rgba(0,0,0,0.6);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--accent);
+      position: relative; overflow: hidden;
+    }
+    .brand-mark::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(115deg, transparent 30%, rgba(217,160,91,0.18) 48%, transparent 62%);
+      transform: translateX(-120%); transition: transform 700ms ease;
+    }
+    .brand:hover .brand-mark::after { transform: translateX(120%); }
+    .brand-name { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; letter-spacing: 0.01em; }
+    .brand-name em { font-style: normal; color: var(--accent); }
+    .nav { display: flex; align-items: center; gap: clamp(1rem, 2.5vw, 2rem); }
+    .nav a { font-size: var(--text-sm); font-weight: 600; color: var(--text-muted); transition: color var(--transition); }
+    .nav a:hover { color: var(--text); }
+    .nav a.btn-gold, .nav a.btn-gold:hover { color: #1E1305; }
+    .nav-links { display: flex; align-items: center; gap: clamp(1rem, 2.5vw, 2rem); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      font-size: var(--text-sm); font-weight: 700; border-radius: 12px;
+      padding: 0.7rem 1.25rem; transition: all var(--transition); white-space: nowrap;
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, #E3AE6A, #C97B3D);
+      color: #1E1305; box-shadow: 0 10px 26px -10px rgba(217, 160, 91, 0.55);
+    }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 14px 32px -10px rgba(217, 160, 91, 0.7); }
+    .btn-ghost { border: 1px solid var(--border-strong); color: var(--text); }
+    .btn-ghost:hover { border-color: var(--accent); background: var(--accent-soft); }
+
+    /* ============ HERO ============ */
+    .hero { padding: clamp(3.5rem, 9vw, 7rem) 0 clamp(3rem, 7vw, 5.5rem); }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: var(--space-6);
+    }
+    .kicker::before { content: ""; width: 28px; height: 1px; background: var(--accent); }
+    .hero h1 { font-size: var(--text-2xl); letter-spacing: -0.01em; margin-bottom: var(--space-6); }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-lead { font-size: var(--text-lg); font-weight: 400; color: var(--text-muted); line-height: 1.6; margin-bottom: var(--space-8); }
+    .hero-lead strong { color: var(--text); font-weight: 700; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-bottom: var(--space-8); }
+    .btn-lg { padding: 1rem 1.9rem; font-size: var(--text-base); border-radius: 14px; }
+    .hero-note { display: flex; align-items: center; gap: 0.6rem; font-size: var(--text-sm); color: var(--text-faint); }
+    .hero-note svg { flex-shrink: 0; }
+
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: linear-gradient(160deg, rgba(36, 26, 15, 0.85), rgba(27, 18, 9, 0.9));
+      overflow: hidden;
+    }
+    .hstat { padding: var(--space-6) var(--space-4); text-align: center; position: relative; }
+    .hstat + .hstat { border-left: 1px solid var(--border); }
+    .hstat-num { font-family: var(--font-display); font-size: clamp(1.9rem, 3.5vw, 2.6rem); font-weight: 600; color: var(--accent); line-height: 1.1; }
+    .hstat-label { font-size: var(--text-xs); color: var(--text-muted); margin-top: 0.5rem; font-weight: 600; }
+
+    /* ============ TASK CHIPS ============ */
+    .chips { padding: var(--space-6) 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(28, 20, 12, 0.5); }
+    .chips-row { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+    .chip {
+      font-size: var(--text-xs); font-weight: 600; color: var(--text-muted);
+      border: 1px solid var(--border); border-radius: 999px; padding: 0.45rem 0.95rem;
+      background: rgba(33, 23, 9, 0.6); transition: all var(--transition);
+    }
+    .chip:hover { color: var(--accent); border-color: var(--border-strong); transform: translateY(-2px); }
+    .chips-caption { text-align: center; font-size: var(--text-xs); color: var(--text-faint); margin-top: var(--space-4); }
+
+    /* ============ SECTION HEADS ============ */
+    .sec { padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
+    .sec-head { max-width: 640px; margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+    .sec-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+    .sec-head.center .kicker { justify-content: center; }
+    .sec-head.center .kicker::before { display: none; }
+    .sec-title { font-size: var(--text-xl); margin-bottom: var(--space-4); }
+    .sec-sub { color: var(--text-muted); font-size: var(--text-base); }
+
+    /* ============ SURVEY ============ */
+    .survey-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(1.5rem, 4vw, 3rem); align-items: start; }
+    .panel {
+      background: linear-gradient(165deg, rgba(38, 27, 15, 0.7), rgba(27, 18, 9, 0.85));
+      border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(1.5rem, 3.5vw, 2.25rem);
+    }
+    .panel h3 { font-size: var(--text-lg); margin-bottom: var(--space-6); }
+    .bar-item { margin-bottom: var(--space-5); }
+    .bar-item:last-child { margin-bottom: 0; }
+    .bar-top { display: flex; justify-content: space-between; font-size: var(--text-sm); font-weight: 700; margin-bottom: 0.5rem; }
+    .bar-top span:last-child { color: var(--accent); font-family: var(--font-display); font-size: var(--text-lg); }
+    .bar-track { height: 8px; background: rgba(217, 160, 91, 0.1); border-radius: 999px; overflow: hidden; }
+    .bar-fill {
+      height: 100%; border-radius: 999px; width: 0;
+      background: linear-gradient(90deg, #8C5A2B, var(--accent));
+      transition: width 1400ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .survey-cards { display: grid; gap: var(--space-4); }
+    .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+    .stat-card { text-align: center; padding: var(--space-6) var(--space-4); }
+    .stat-card .big { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.1rem); color: var(--accent); margin-bottom: 0.4rem; }
+    .stat-card .small { font-size: var(--text-xs); color: var(--text-muted); font-weight: 600; }
+    .survey-note { font-size: var(--text-xs); color: var(--text-faint); margin-top: var(--space-6); line-height: 1.55; }
+
+    /* ============ AI ============ */
+    .ai-panel {
+      position: relative; overflow: hidden; border-radius: calc(var(--radius) + 6px);
+      border: 1px solid var(--border-strong);
+      background:
+        radial-gradient(600px 300px at 90% 10%, rgba(201, 123, 61, 0.18), transparent 65%),
+        linear-gradient(160deg, rgba(40, 28, 14, 0.9), rgba(24, 16, 8, 0.95));
+      padding: clamp(2rem, 5vw, 3.5rem);
+      display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(2rem, 5vw, 4rem); align-items: center;
+    }
+    .ai-panel::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(rgba(217,160,91,0.14) 1px, transparent 1px);
+      background-size: 26px 26px; opacity: 0.5;
+    }
+    .ai-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem; font-size: var(--text-xs); font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+      background: var(--accent-soft); border: 1px solid var(--border-strong);
+      border-radius: 999px; padding: 0.4rem 0.95rem; margin-bottom: var(--space-6);
+    }
+    .ai-panel h2 { font-size: var(--text-xl); margin-bottom: var(--space-4); }
+    .ai-panel .sec-sub { margin-bottom: 0; }
+    .ai-steps { display: grid; gap: var(--space-4); position: relative; }
+    .ai-step {
+      display: flex; gap: 1rem; align-items: flex-start;
+      background: rgba(24, 16, 8, 0.7); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.1rem 1.25rem;
+    }
+    .ai-step-num {
+      width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #E3AE6A, #C97B3D); color: #1E1305; font-weight: 800; font-size: var(--text-xs);
+    }
+    .ai-step b { display: block; font-size: var(--text-sm); margin-bottom: 0.15rem; }
+    .ai-step span { font-size: var(--text-xs); color: var(--text-muted); line-height: 1.5; }
+
+    /* ============ HOW ============ */
+    .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); counter-reset: step; }
+    .how-card {
+      position: relative; padding: clamp(1.5rem, 3vw, 2rem);
+      background: linear-gradient(170deg, rgba(36, 26, 15, 0.65), rgba(27, 18, 9, 0.8));
+      border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+      transition: transform var(--transition), border-color var(--transition);
+    }
+    .how-card:hover { transform: translateY(-4px); border-color: var(--border-strong); }
+    .how-num {
+      font-family: var(--font-display); font-style: italic; font-size: 3.4rem; line-height: 1;
+      color: rgba(217, 160, 91, 0.22); margin-bottom: var(--space-4);
+    }
+    .how-card h3 { font-size: var(--text-lg); margin-bottom: 0.6rem; }
+    .how-card p { font-size: var(--text-sm); color: var(--text-muted); }
+    .how-confirm {
+      margin-top: var(--space-6); display: flex; align-items: center; gap: 0.9rem;
+      border: 1px solid var(--border); border-left: 3px solid var(--accent);
+      background: rgba(36, 26, 15, 0.5); border-radius: 14px; padding: 1.1rem 1.4rem;
+      font-size: var(--text-sm); color: var(--text-muted);
+    }
+    .how-confirm svg { flex-shrink: 0; color: var(--success); }
+    .how-confirm b { color: var(--text); }
+
+    /* ============ BENEFITS TABS ============ */
+    .tabs { display: inline-flex; gap: 0.35rem; padding: 0.35rem; border: 1px solid var(--border); border-radius: 999px; background: rgba(28, 20, 12, 0.7); margin: 0 auto var(--space-8); }
+    .tab {
+      font-size: var(--text-sm); font-weight: 700; color: var(--text-muted);
+      padding: 0.6rem 1.5rem; border-radius: 999px; transition: all var(--transition);
+    }
+    .tab[aria-selected="true"] { background: linear-gradient(135deg, #E3AE6A, #C97B3D); color: #1E1305; }
+    .benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-5); }
+    .benefit {
+      display: flex; gap: 1.1rem; padding: 1.4rem 1.5rem;
+      background: linear-gradient(170deg, rgba(36, 26, 15, 0.65), rgba(27, 18, 9, 0.8));
+      border: 1px solid var(--border); border-radius: 16px;
+      transition: transform var(--transition), border-color var(--transition);
+    }
+    .benefit:hover { transform: translateY(-3px); border-color: var(--border-strong); }
+    .benefit-icon {
+      width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--accent-soft); border: 1px solid var(--border-strong); color: var(--accent);
+    }
+    .benefit b { display: block; font-size: var(--text-base); margin-bottom: 0.3rem; }
+    .benefit span { font-size: var(--text-sm); color: var(--text-muted); line-height: 1.55; }
+
+    /* ============ COMPETITORS ============ */
+    .compare-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: linear-gradient(170deg, rgba(36, 26, 15, 0.6), rgba(27, 18, 9, 0.85)); }
+    .compare { width: 100%; min-width: 720px; border-collapse: collapse; }
+    .compare th, .compare td { padding: 1rem 1.25rem; text-align: left; font-size: var(--text-sm); border-bottom: 1px solid var(--border); vertical-align: middle; }
+    .compare thead th { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 600; border-bottom: 1px solid var(--border-strong); }
+    .compare thead th:first-child { font-family: var(--font-body); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); }
+    .compare tbody tr:last-child td { border-bottom: none; }
+    .compare tbody tr { transition: background var(--transition); }
+    .compare tbody tr:hover { background: rgba(217, 160, 91, 0.04); }
+    .compare td:first-child { font-weight: 700; color: var(--text-muted); }
+    .col-us { color: var(--accent); font-weight: 700; }
+    .compare thead th.col-us { position: relative; }
+    .compare thead th.col-us::after {
+      content: "наша платформа"; display: block;
+      font-family: var(--font-body); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #1E1305; background: linear-gradient(135deg, #E3AE6A, #C97B3D);
+      border-radius: 999px; padding: 0.15rem 0.7rem; width: max-content; margin-top: 0.35rem;
+    }
+    .icon-yes { color: var(--success); font-weight: 700; }
+    .icon-no { color: var(--text-faint); }
+    .compare-note { font-size: var(--text-xs); color: var(--text-faint); margin-top: var(--space-4); line-height: 1.55; }
+
+    /* ============ CALCULATOR ============ */
+    .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
+    .calc-panel { padding: clamp(1.75rem, 4vw, 2.75rem); }
+    .calc-panel h3 { font-size: var(--text-lg); margin-bottom: var(--space-6); }
+    .calc-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem; }
+    .calc-row .label { font-size: var(--text-sm); color: var(--text-muted); font-weight: 600; }
+    .calc-row .val { font-family: var(--font-display); font-size: var(--text-lg); color: var(--text); }
+    .calc-row.total { border-top: 1px solid var(--border-strong); padding-top: 1rem; margin-top: 0.5rem; }
+    .calc-row.total .label { color: var(--text); }
+    .calc-row.total .val { color: var(--accent); font-size: var(--text-xl); }
+    input[type="range"] {
+      -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent) var(--fill, 10%), rgba(217,160,91,0.15) var(--fill, 10%));
+      margin: 1.25rem 0 0.5rem; cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%;
+      background: linear-gradient(135deg, #E3AE6A, #C97B3D); border: 3px solid #1E1509;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5); cursor: grab;
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: linear-gradient(135deg, #E3AE6A, #C97B3D); border: 3px solid #1E1509;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5); cursor: grab;
+    }
+    .calc-minmax { display: flex; justify-content: space-between; font-size: var(--text-xs); color: var(--text-faint); font-weight: 600; }
+    .calc-presets { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; }
+    .preset { font-size: var(--text-xs); font-weight: 700; color: var(--text-muted); border: 1px solid var(--border); border-radius: 999px; padding: 0.35rem 0.85rem; transition: all var(--transition); }
+    .preset:hover { color: var(--accent); border-color: var(--border-strong); }
+
+    /* ============ AUDIENCE ============ */
+    .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+    .aud-card { text-align: center; padding: clamp(1.75rem, 3vw, 2.5rem) var(--space-4); }
+    .aud-emoji { font-size: 2.2rem; margin-bottom: var(--space-4); display: block; }
+    .aud-card h3 { font-size: var(--text-lg); margin-bottom: 0.6rem; }
+    .aud-card p { font-size: var(--text-sm); color: var(--text-muted); margin: 0 auto; }
+    .audience-note { text-align: center; margin-top: var(--space-6); font-size: var(--text-xs); color: var(--text-faint); max-width: 620px; margin-left: auto; margin-right: auto; line-height: 1.55; }
+
+    /* ============ TEAM ============ */
+    .team-panel { text-align: center; padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 4vw, 3rem); }
+    .team-panel h2 { font-size: var(--text-xl); margin-bottom: var(--space-4); }
+    .team-panel .lead { font-size: var(--text-base); color: var(--text-muted); max-width: 620px; margin: 0 auto var(--space-8); }
+    .team-panel .lead b { color: var(--text); }
+    .avatars { display: flex; justify-content: center; gap: clamp(0.75rem, 2vw, 1.5rem); flex-wrap: wrap; margin-bottom: var(--space-8); }
+    .avatar {
+      width: clamp(64px, 8vw, 88px); height: clamp(64px, 8vw, 88px); border-radius: 50%;
+      background: linear-gradient(145deg, #2E1F0E, #1B120A);
+      border: 1px solid var(--border-strong);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--accent);
+      box-shadow: inset 0 1px 0 rgba(243,233,219,0.08), 0 10px 24px -10px rgba(0,0,0,0.55);
+      transition: transform var(--transition), border-color var(--transition);
+    }
+    .avatar:hover { transform: translateY(-6px) scale(1.05); border-color: var(--accent); }
+    .team-facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+    .team-fact {
+      font-size: var(--text-xs); font-weight: 700; color: var(--text-muted);
+      border: 1px solid var(--border); border-radius: 999px; padding: 0.5rem 1.1rem;
+      background: rgba(28, 20, 12, 0.6);
+    }
+
+    /* ============ CTA ============ */
+    .cta { text-align: center; padding: clamp(3.5rem, 9vw, 6rem) 0; }
+    .cta h2 { font-size: var(--text-2xl); margin-bottom: var(--space-4); }
+    .cta h2 em { font-style: italic; color: var(--accent); }
+    .cta p { color: var(--text-muted); font-size: var(--text-lg); max-width: 520px; margin: 0 auto var(--space-8); }
+
+    /* ============ FOOTER ============ */
+    .footer { border-top: 1px solid var(--border); padding: var(--space-8) 0; background: rgba(28, 20, 12, 0.5); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+    .footer-brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; }
+    .footer-note { font-size: var(--text-xs); color: var(--text-faint); }
+    .footer-links { display: flex; gap: var(--space-6); font-size: var(--text-sm); }
+    .footer-links a { color: var(--text-muted); transition: color var(--transition); }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ============ REVEAL ============ */
+    .reveal { transition: opacity 700ms ease, transform 700ms cubic-bezier(0.16, 1, 0.3, 1); }
+    html.js .reveal { opacity: 0; transform: translateY(26px); }
+    html.js .reveal.visible { opacity: 1; transform: none; }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 900px) {
+      .hero-grid, .survey-grid, .ai-panel, .calc-grid { grid-template-columns: 1fr; }
+      .how-grid, .audience-grid { grid-template-columns: 1fr; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 560px) {
+      .mini-grid { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: 1fr; }
+      .hstat + .hstat { border-left: none; border-top: 1px solid var(--border); }
+      .header-cta span { display: none; }
+      .header-cta { padding: 0.7rem 0.9rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; }
+      .bar-fill { transition: none; width: var(--target); }
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between antialiased">
+<body>
 
-  <!-- ХЕДЕР -->
-  <header class="w-full border-b border-[#E3D7C7] bg-[#FAF6F0]/90 backdrop-blur-md sticky top-0 z-50">
-    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 rounded-lg bg-[#D97757] text-white flex items-center justify-center font-extrabold text-lg">Д</div>
-        <span class="font-bold text-xl text-[#3D3231] tracking-tight">Дело</span>
-      </div>
-      <a href="https://neverson1gq-oss.github.io/podrabotka/" class="btn-accent text-xs font-bold px-4 py-2.5 rounded-xl flex items-center gap-1.5">
+<!-- ХЕДЕР -->
+<header class="header">
+  <div class="wrap header-inner">
+    <a href="#" class="brand" aria-label="Дело — на главную">
+      <span class="brand-mark" aria-hidden="true">Д</span>
+      <span class="brand-name">Дел<em>о</em></span>
+    </a>
+    <nav class="nav" aria-label="Основная навигация">
+      <span class="nav-links">
+        <a href="#benefits">Преимущества</a>
+        <a href="#how">Как работает</a>
+        <a href="#compare">Сравнение</a>
+        <a href="#team">Команда</a>
+      </span>
+      <a class="btn btn-gold header-cta" href="https://neverson1gq-oss.github.io/podrabotka/" aria-label="Перейти на сайт">
         <span>Перейти на сайт</span>
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-    </div>
-  </header>
+    </nav>
+  </div>
+</header>
 
-  <!-- 1. ПЕРВЫЙ ЭКРАН -->
-  <section class="w-full py-12 md:py-20 px-4 flex flex-col justify-center min-h-[calc(100vh-73px)]">
-    <div class="max-w-5xl mx-auto w-full">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFE3D3] text-[#8C4A33] text-xs font-semibold mb-6">
-        <span>Умная платформа для задач и подработки</span>
-      </div>
+<main>
 
-      <!-- Заголовок: 7 слов -->
-      <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#3D3231] mb-5 leading-[1.12] max-w-3xl">
-        Зарабатывай первые деньги в свободное от учёбы время
-      </h1>
-
-      <!-- Подзаголовок: 12 слов -->
-      <p class="text-lg sm:text-xl text-[#7A6C6B] mb-8 max-w-2xl font-normal leading-relaxed">
-        Платформа соединяет школьников и студентов с заказчиками для быстрого выполнения небольших задач.
-      </p>
-
-      <!-- Кнопка: 3 слова с глаголом -->
-      <div class="mb-6">
-        <a href="https://neverson1gq-oss.github.io/podrabotka/" class="btn-accent inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-extrabold text-base w-full sm:w-auto">
-          <span>Перейти на сайт</span>
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-        </a>
-      </div>
-
-      <!-- Доказательство: ровно 1 строка -->
-      <div class="flex items-center gap-2 text-sm text-[#7A6C6B] font-medium">
-        <svg class="w-4 h-4 text-[#2D8A62] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-        <span>93% подростков хотят заработать личные деньги, а комиссия платформы составляет 10%.</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ИНТЕРАКТИВНАЯ СТАТИСТИКА -->
-  <section class="py-16 border-t border-[#E3D7C7] bg-[#F5EFE6]">
-    <div class="max-w-5xl mx-auto px-4">
-      <div class="mb-10 text-center sm:text-left">
-        <span class="text-xs font-bold text-[#D97757] tracking-wider uppercase">Анализ рынка и социология</span>
-        <h2 class="text-2xl sm:text-3xl font-bold text-[#3D3231] mt-1">Почему подростки ищут работу?</h2>
-        <p class="text-[#7A6C6B] text-sm mt-1">Данные опросов среди учащейся молодёжи в возрасте 14–20 лет.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <div class="bg-[#FAF6F0] p-6 rounded-2xl border border-[#E3D7C7]">
-          <h3 class="font-bold text-base mb-4 text-[#3D3231]">Главные мотивы поиска подработки:</h3>
-          <div class="space-y-4">
-            <div>
-              <div class="flex justify-between text-xs font-semibold mb-1">
-                <span>Личные карманные расходы</span>
-                <span class="text-[#D97757]">52%</span>
-              </div>
-              <div class="w-full h-2.5 bg-[#EFE6D8] rounded-full overflow-hidden">
-                <div class="h-full bg-[#D97757] rounded-full" style="width: 52%"></div>
-              </div>
-            </div>
-
-            <div>
-              <div class="flex justify-between text-xs font-semibold mb-1">
-                <span>Первый практический опыт</span>
-                <span class="text-[#D97757]">28%</span>
-              </div>
-              <div class="w-full h-2.5 bg-[#EFE6D8] rounded-full overflow-hidden">
-                <div class="h-full bg-[#D97757] rounded-full" style="width: 28%"></div>
-              </div>
-            </div>
-
-            <div>
-              <div class="flex justify-between text-xs font-semibold mb-1">
-                <span>Оплата курсов и хобби</span>
-                <span class="text-[#D97757]">13%</span>
-              </div>
-              <div class="w-full h-2.5 bg-[#EFE6D8] rounded-full overflow-hidden">
-                <div class="h-full bg-[#D97757] rounded-full" style="width: 13%"></div>
-              </div>
-            </div>
-
-            <div>
-              <div class="flex justify-between text-xs font-semibold mb-1">
-                <span>Помощь семье</span>
-                <span class="text-[#D97757]">7%</span>
-              </div>
-              <div class="w-full h-2.5 bg-[#EFE6D8] rounded-full overflow-hidden">
-                <div class="h-full bg-[#D97757] rounded-full" style="width: 7%"></div>
-              </div>
-            </div>
-          </div>
+<!-- ГЛАВНЫЙ ЭКРАН -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="kicker">Платформа задач и подработки</span>
+        <h1>Найди дело <em>по себе</em> — и зарабатывай в удобное время</h1>
+        <p class="hero-lead">
+          <strong>Дело</strong> — платформа для всех: взрослых, студентов и подростков <strong>от 14 лет</strong>.
+          Публикуйте задачи или беритесь за них — оплата проходит после того, как обе стороны подтвердят выполнение.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-gold btn-lg" href="https://neverson1gq-oss.github.io/podrabotka/">
+            Перейти на сайт
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-ghost btn-lg" href="#how">Как это работает</a>
         </div>
-
-        <div class="space-y-4">
-          <div class="warm-card p-5 rounded-2xl">
-            <h4 class="font-bold text-base text-[#3D3231]">9 из 10 старшеклассников задумывались о работе</h4>
-            <p class="text-xs text-[#7A6C6B] mt-2 leading-relaxed">
-              Основной барьер — жёсткий график и отсутствие предложений с почасовой оплатой. Наш сервис предлагает выполнять небольшие поручения в свободные часы.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-2 gap-4">
-            <div class="p-4 bg-[#FAF6F0] border border-[#E3D7C7] rounded-xl text-center">
-              <div class="text-2xl font-black text-[#D97757]">2-4 часа</div>
-              <div class="text-xs text-[#7A6C6B] mt-1">Среднее свободное время в день</div>
-            </div>
-            <div class="p-4 bg-[#FAF6F0] border border-[#E3D7C7] rounded-xl text-center">
-              <div class="text-2xl font-black text-[#D97757]">500-2000 ₽</div>
-              <div class="text-xs text-[#7A6C6B] mt-1">Доход за одно выполнение</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ИНТЕГРАЦИЯ НЕЙРОСЕТИ -->
-  <section class="py-16 border-t border-[#E3D7C7]">
-    <div class="max-w-5xl mx-auto px-4">
-      <div class="bg-[#F5EFE6] border border-[#E3D7C7] rounded-3xl p-8 sm:p-10 relative overflow-hidden">
-        <div class="max-w-2xl relative z-10">
-          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#EFE3D3] text-[#8C4A33] text-xs font-bold mb-4">
-            <span>🤖 Умный подбор задач</span>
-          </div>
-          <h2 class="text-2xl sm:text-3xl font-bold text-[#3D3231] mb-3">
-            Встроенная нейросеть рассчитает свободные слоты
-          </h2>
-          <p class="text-[#7A6C6B] text-sm sm:text-base leading-relaxed mb-6">
-            Алгоритм анализирует расписание уроков или лекций, строит подходящие временные окна и рекомендует только те заказы, которые подходят под ваши навыки, местоположение и график.
-          </p>
-          
-          <div class="space-y-3">
-            <div class="flex items-center gap-3 bg-[#FAF6F0] p-3 rounded-xl border border-[#E3D7C7]">
-              <span class="w-7 h-7 rounded-lg bg-[#D97757]/15 text-[#D97757] flex items-center justify-center font-bold text-xs">1</span>
-              <span class="text-xs font-semibold text-[#3D3231]">Умный поиск совпадений по времени учёбы и подработки</span>
-            </div>
-            <div class="flex items-center gap-3 bg-[#FAF6F0] p-3 rounded-xl border border-[#E3D7C7]">
-              <span class="w-7 h-7 rounded-lg bg-[#D97757]/15 text-[#D97757] flex items-center justify-center font-bold text-xs">2</span>
-              <span class="text-xs font-semibold text-[#3D3231]">Персональные рекомендации заказов на основе опыта</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2. КАК ЭТО РАБОТАЕТ -->
-  <section class="py-16 border-t border-[#E3D7C7] bg-[#F5EFE6]">
-    <div class="max-w-5xl mx-auto px-4">
-      <div class="text-center mb-12">
-        <span class="text-xs font-bold text-[#D97757] tracking-wider uppercase">Понятный путь</span>
-        <h2 class="text-2xl sm:text-3xl font-bold text-[#3D3231] mt-1">Как это работает</h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-[#FAF6F0] p-6 rounded-2xl border border-[#E3D7C7]">
-          <div class="w-10 h-10 rounded-xl bg-[#D97757] text-white flex items-center justify-center font-extrabold mb-4">1</div>
-          <h3 class="font-bold text-lg text-[#3D3231] mb-2">Создай профиль</h3>
-          <p class="text-xs text-[#7A6C6B] leading-relaxed">Зарегистрируйся на сайте и укажи свои навыки или опиши задачу, которую нужно решить.</p>
-        </div>
-
-        <div class="bg-[#FAF6F0] p-6 rounded-2xl border border-[#E3D7C7]">
-          <div class="w-10 h-10 rounded-xl bg-[#D97757] text-white flex items-center justify-center font-extrabold mb-4">2</div>
-          <h3 class="font-bold text-lg text-[#3D3231] mb-2">Согласуй детали</h3>
-          <p class="text-xs text-[#7A6C6B] leading-relaxed">Используй подбор нейросети, чтобы выбрать подходящее задание с фиксированной оплатой.</p>
-        </div>
-
-        <div class="bg-[#FAF6F0] p-6 rounded-2xl border border-[#E3D7C7]">
-          <div class="w-10 h-10 rounded-xl bg-[#D97757] text-white flex items-center justify-center font-extrabold mb-4">3</div>
-          <h3 class="font-bold text-lg text-[#3D3231] mb-2">Получи результат</h3>
-          <p class="text-xs text-[#7A6C6B] leading-relaxed">Заверши работу и получи выплату по правилам прозрачного расчёта сервиса.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. ДЛЯ КОГО -->
-  <section class="py-16 border-t border-[#E3D7C7]">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <span class="text-xs font-bold text-[#D97757] tracking-wider uppercase">Целевая аудитория</span>
-      <h2 class="text-2xl sm:text-3xl font-bold text-[#3D3231] mt-1 mb-6">Для кого создана платформа</h2>
-      
-      <div class="bg-[#F5EFE6] p-8 rounded-2xl border border-[#E3D7C7] text-left">
-        <p class="text-sm sm:text-base text-[#3D3231] leading-relaxed font-normal">
-          Платформа создана для школьников от 14 лет и студентов, которым необходим самостоятельный заработок без срыва учёбы, а также для заказчиков, заинтересованных в оперативной помощи с бытовыми, курьерскими или простыми цифровыми задачами.
+        <p class="hero-note">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--success)"><path d="M20 6 9 17l-5-5"/></svg>
+          Работать на платформе может каждый — включая школьников с 14 лет
         </p>
       </div>
-    </div>
-  </section>
 
-  <!-- 4. СКОЛЬКО СТОИТ -->
-  <section class="py-16 border-t border-[#E3D7C7] bg-[#F5EFE6]">
-    <div class="max-w-5xl mx-auto px-4">
-      <div class="text-center mb-12">
-        <span class="text-xs font-bold text-[#D97757] tracking-wider uppercase">Прозрачные условия</span>
-        <h2 class="text-2xl sm:text-3xl font-bold text-[#3D3231] mt-1">Сколько стоит</h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-        <div class="bg-[#FAF6F0] p-6 rounded-2xl border border-[#E3D7C7]">
-          <h3 class="font-bold text-base text-[#3D3231] mb-1">Заказчик</h3>
-          <div class="text-2xl font-extrabold text-[#D97757] my-2">Бюджет задачи</div>
-          <p class="text-xs text-[#7A6C6B] leading-relaxed">Оплачивает ровно ту сумму, которая была установлена при публикации задания. Никаких скрытых сборов над стоимостью.</p>
+      <div class="hero-stats" role="list" aria-label="Ключевые цифры платформы">
+        <div class="hstat" role="listitem">
+          <div class="hstat-num"><span class="counter" data-count="14" data-suffix="+">0</span></div>
+          <div class="hstat-label">минимальный возраст исполнителя</div>
         </div>
-
-        <div class="bg-[#FAF6F0] p-6 rounded-2xl border border-[#E3D7C7]">
-          <h3 class="font-bold text-base text-[#3D3231] mb-1">Исполнитель</h3>
-          <div class="text-2xl font-extrabold text-[#D97757] my-2">90% от суммы</div>
-          <p class="text-xs text-[#7A6C6B] leading-relaxed">Получает выплату за работу. Комиссия платформы составляет 10% за обеспечение безопасности сделки и подбор заказов.</p>
+        <div class="hstat" role="listitem">
+          <div class="hstat-num"><span class="counter" data-count="10" data-suffix="%">0</span></div>
+          <div class="hstat-label">комиссия платформы</div>
+        </div>
+        <div class="hstat" role="listitem">
+          <div class="hstat-num"><span class="counter" data-count="90" data-suffix="%">0</span></div>
+          <div class="hstat-label">получает исполнитель</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 5. ПРИЗЫВ К ДЕЙСТВИЮ -->
-  <section class="py-20 border-t border-[#E3D7C7]">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="text-3xl sm:text-4xl font-extrabold text-[#3D3231] mb-4">Начни работу с сервисом</h2>
-      <p class="text-[#7A6C6B] text-base mb-8 max-w-lg mx-auto">
-        Открой сайт, чтобы опубликовать первое задание или найти подработку на сегодня.
+<!-- ПРИМЕРЫ ЗАДАЧ -->
+<section class="chips" aria-label="Примеры задач">
+  <div class="wrap">
+    <div class="chips-row">
+      <span class="chip">Погулять с собакой</span>
+      <span class="chip">Купить и доставить продукты</span>
+      <span class="chip">Убраться в квартире</span>
+      <span class="chip">Помощь с домашкой</span>
+      <span class="chip">Собрать мебель</span>
+      <span class="chip">Набрать и оформить текст</span>
+      <span class="chip">Съёмка на телефон</span>
+      <span class="chip">Полить цветы в отпуске</span>
+      <span class="chip">Курьерская доставка</span>
+      <span class="chip">Простые цифровые задачи</span>
+    </div>
+    <p class="chips-caption">Примеры задач, которые публикуют заказчики — от бытовых поручений до небольших цифровых заданий</p>
+  </div>
+</section>
+
+<!-- АНАЛИЗ РЫНКА И СОЦИОЛОГИЯ -->
+<section class="sec" id="survey">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Анализ рынка и социология</span>
+      <h2 class="sec-title">Что показал наш опрос</h2>
+      <p class="sec-sub">Мы опросили учащуюся молодёжь 14–20 лет — вот результаты.</p>
+    </div>
+    <div class="survey-grid">
+      <div class="panel reveal">
+        <h3>Главные мотивы поиска подработки</h3>
+        <div class="bar-item">
+          <div class="bar-top"><span>Личные карманные расходы</span><span>52%</span></div>
+          <div class="bar-track"><div class="bar-fill" data-w="52"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-top"><span>Первый практический опыт</span><span>28%</span></div>
+          <div class="bar-track"><div class="bar-fill" data-w="28"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-top"><span>Оплата курсов и хобби</span><span>13%</span></div>
+          <div class="bar-track"><div class="bar-fill" data-w="13"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-top"><span>Помощь семье</span><span>7%</span></div>
+          <div class="bar-track"><div class="bar-fill" data-w="7"></div></div>
+        </div>
+      </div>
+      <div class="survey-cards">
+        <div class="panel reveal">
+          <h3 style="margin-bottom:0.5rem">9 из 10 старшеклассников задумывались о работе</h3>
+          <p style="font-size:var(--text-sm); color:var(--text-muted)">Главный барьер — жёсткий график и отсутствие предложений с почасовой оплатой. Мы предлагаем выполнять небольшие поручения в свободные часы.</p>
+        </div>
+        <div class="mini-grid">
+          <div class="panel stat-card reveal">
+            <div class="big">2–4 часа</div>
+            <div class="small">среднее свободное время в день</div>
+          </div>
+          <div class="panel stat-card reveal">
+            <div class="big">500–2000 ₽</div>
+            <div class="small">типичный доход за одно выполнение</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="survey-note">Данные нашего опроса среди учащихся 14–20 лет. Цифры описывают ответы респондентов и не являются гарантией дохода — результат зависит от задачи и города.</p>
+  </div>
+</section>
+
+<!-- НЕЙРОСЕТЬ -->
+<section class="sec" id="ai">
+  <div class="wrap">
+    <div class="ai-panel reveal">
+      <div>
+        <span class="ai-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M19.1 4.9l-2.8 2.8M7.7 16.3l-2.8 2.8"/><circle cx="12" cy="12" r="3"/></svg>
+          Встроенная нейросеть
+        </span>
+        <h2>Умный подбор задач под ваш график</h2>
+        <p class="sec-sub">Алгоритм анализирует ваше расписание — учёбу, работу и личные дела, — строит подходящие временные окна и рекомендует только те заказы, которые подходят под ваши навыки, местоположение и свободное время.</p>
+      </div>
+      <div class="ai-steps">
+        <div class="ai-step">
+          <span class="ai-step-num">1</span>
+          <div><b>Совпадение по времени</b><span>Нейросеть сопоставляет свободные окна в вашем графике с дедлайнами заказов.</span></div>
+        </div>
+        <div class="ai-step">
+          <span class="ai-step-num">2</span>
+          <div><b>Персональные рекомендации</b><span>Заказы подбираются на основе вашего опыта, навыков и района.</span></div>
+        </div>
+        <div class="ai-step">
+          <span class="ai-step-num">3</span>
+          <div><b>Меньше поиска — больше дела</b><span>Вам не нужно листать сотни заказов: платформа приносит подходящие сама.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- КАК ЭТО РАБОТАЕТ -->
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="kicker">Понятный путь</span>
+      <h2 class="sec-title">Как это работает</h2>
+      <p class="sec-sub">Три шага — от публикации до выплаты.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-card reveal">
+        <div class="how-num">01</div>
+        <h3>Создай профиль</h3>
+        <p>Зарегистрируйтесь и укажите свои навыки — или опишите задачу, которую нужно решить. Роль можно выбрать сразу: исполнитель или заказчик.</p>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-num">02</div>
+        <h3>Согласуй детали</h3>
+        <p>Воспользуйтесь подбором нейросети, чтобы выбрать подходящее задание с фиксированной оплатой, — или выберите исполнителя из откликов.</p>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-num">03</div>
+        <h3>Получи результат</h3>
+        <p>Исполнитель выполняет работу, обе стороны подтверждают результат — и выплата проходит по прозрачным правилам сервиса.</p>
+      </div>
+    </div>
+    <div class="how-confirm reveal">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+      <span><b>Двойное подтверждение:</b> заказ считается выполненным только после подтверждения и заказчиком, и исполнителем — это защищает обе стороны.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ПРЕИМУЩЕСТВА -->
+<section class="sec" id="benefits">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="kicker">Плюсы платформы</span>
+      <h2 class="sec-title">Что вы получаете</h2>
+      <p class="sec-sub">Платформа полезна обеим сторонам — выберите свою роль.</p>
+    </div>
+    <div style="text-align:center" class="reveal">
+      <div class="tabs" role="tablist" aria-label="Выбор роли">
+        <button class="tab" role="tab" id="tab-exec" aria-selected="true" aria-controls="panel-exec">Исполнителю</button>
+        <button class="tab" role="tab" id="tab-cust" aria-selected="false" aria-controls="panel-cust">Заказчику</button>
+      </div>
+    </div>
+    <div id="panel-exec" role="tabpanel" aria-labelledby="tab-exec">
+      <div class="benefits-grid">
+        <div class="benefit reveal">
+          <span class="benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+          <div><b>Никакой платы за отклики</b><span>Откликайтесь на заказы бесплатно. Комиссия 10% удерживается только с выполненной работы.</span></div>
+        </div>
+        <div class="benefit reveal">
+          <span class="benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+          <div><b>Гибкий график</b><span>Берите задачи в свободные окна — между уроками, парами или основной работой. Никаких смен и графиков.</span></div>
+        </div>
+        <div class="benefit reveal">
+          <span class="benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+          <div><b>Работа с 14 лет</b><span>Подросткам не приходится искать «серые» схемы: здесь можно зарабатывать рядом с домом и учёбой.</span></div>
+        </div>
+        <div class="benefit reveal">
+          <span class="benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+          <div><b>Умный подбор заказов</b><span>Нейросеть рекомендует задания под ваши навыки, район и расписание — не нужно перебирать всё вручную.</span></div>
+        </div>
+        <div class="benefit reveal">
+          <span class="benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+          <div><b>Защита сделки</b><span>Оплата проходит только после того, как вы и заказчик подтвердили выполнение.</span></div>
+        </div>
+        <div class="benefit reveal">
+          <span class="benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span>
+          <div><b>Растущая репутация</b><span>Каждое выполненное дело повышает ваш рейтинг.</span></div>
+        </div>
+      </div>
+    </div>
+    <div id="panel-cust" role="tabpanel" aria-labelledby="tab-cust" hidden>
+      <div class="benefits-grid">
+        <div class="benefit reveal">
+          <span class="benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg></span>
+          <div><b>Бесплатное размещение</b><span>Публикация задачи и отклики исполнителей бесплатны — вы платите только бюджет задачи.</span></div>
+        </div>
+        <div class="benefit reveal">
+          <span class="benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+          <div><b>Быстрый отклик</b><span>Задачи видят исполнители из вашего района — помощника проще найти.</span></div>
+        </div>
+        <div class="benefit reveal">
+          <span class="benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+          <div><b>Фиксированная цена</b><span>Вы задаёте бюджет при публикации — сумма не меняется в процессе. Никаких скрытых сборов сверху.</span></div>
+        </div>
+        <div class="benefit reveal">
+          <span class="benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <div><b>Оплата после результата</b><span>Деньги переводятся исполнителю только после подтверждения выполнения с вашей стороны.</span></div>
+        </div>
+        <div class="benefit reveal">
+          <span class="benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <div><b>Помощники рядом</b><span>Исполнители из вашего района — от школьника, который погуляет с собакой, до студента, который соберёт мебель.</span></div>
+        </div>
+        <div class="benefit reveal">
+          <span class="benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-7 7c0 2 1 3 1 3h12s1-1 1-3a7 7 0 0 0-7-7z"/><path d="M5 12h14M8 22h8M12 12v10"/></svg></span>
+          <div><b>Отзывы и рейтинги</b><span>Оценки исполнителей помогают выбрать того, кому доверяют.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- СРАВНЕНИЕ С КОНКУРЕНТАМИ -->
+<section class="sec" id="compare">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="kicker">Отличие от конкурентов</span>
+      <h2 class="sec-title">Чем мы отличаемся</h2>
+      <p class="sec-sub">Честное сравнение с крупными площадками задач и фриланса.</p>
+    </div>
+    <div class="compare-wrap reveal">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th scope="col">Критерий</th>
+            <th scope="col" class="col-us">Дело</th>
+            <th scope="col">YouDo</th>
+            <th scope="col">Профи.ру</th>
+            <th scope="col">Kwork</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Возраст исполнителя</td>
+            <td class="col-us">от 14 лет</td>
+            <td>от 18 лет</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Плата за отклики</td>
+            <td class="col-us"><span class="icon-yes">✓ нет</span></td>
+            <td>платные отклики и пакеты</td>
+            <td>платные отклики</td>
+            <td><span class="icon-yes">✓ нет</span></td>
+          </tr>
+          <tr>
+            <td>Комиссия</td>
+            <td class="col-us">10% с исполнителя</td>
+            <td>11% + 35 ₽ с заказчика — только при «Сделке без риска»</td>
+            <td>платные отклики</td>
+            <td>20% с заказа</td>
+          </tr>
+          <tr>
+            <td>Локальные задачи рядом с домом</td>
+            <td class="col-us"><span class="icon-yes">✓ да</span></td>
+            <td><span class="icon-yes">✓ да</span></td>
+            <td><span class="icon-yes">✓ да</span></td>
+            <td class="icon-no">только онлайн</td>
+          </tr>
+          <tr>
+            <td>ИИ-подбор по вашему графику</td>
+            <td class="col-us"><span class="icon-yes">✓ да</span></td>
+            <td class="icon-no">—</td>
+            <td class="icon-no">—</td>
+            <td class="icon-no">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="compare-note">
+      Данные о конкурентах — по открытым источникам: справка YouDo для исполнителей
+      (<a href="https://help.youdo.com/articles/kak-stat-ispolnitelem/" style="color:var(--accent)">help.youdo.com</a> — «Исполнителем может стать любой человек старше 18 лет») и комиссия «Сделки без риска»
+      (<a href="https://help.youdo.com/articles/komissiya-za-zadaniya-so-sdelkoy-bez-riska/" style="color:var(--accent)">11% + 35 ₽ с заказчика</a>);
+      комиссии Kwork и Профи.ру — по обзорам бирж фриланса (октябрь 2026).
+      «—» — мы не нашли открытых данных; это не означает, что функции нет. Условия сервисов могут меняться.
+    </p>
+  </div>
+</section>
+
+<!-- КАЛЬКУЛЯТОР КОМИССИИ -->
+<section class="sec" id="calc">
+  <div class="wrap">
+    <div class="calc-grid">
+      <div class="sec-head reveal" style="margin-bottom:0">
+        <span class="kicker">Прозрачные условия</span>
+        <h2 class="sec-title">Сколько стоит</h2>
+        <p class="sec-sub">Заказчик платит ровно бюджет задачи — без скрытых сборов сверху. Исполнитель получает 90% суммы; комиссия платформы 10% идёт на безопасность сделки, подбор заказов и поддержку.</p>
+      </div>
+      <div class="panel calc-panel reveal">
+        <h3>Калькулятор выплаты</h3>
+        <label for="budget" style="font-size:var(--text-sm); color:var(--text-muted); font-weight:600; display:block">Бюджет задачи</label>
+        <input type="range" id="budget" min="100" max="10000" step="100" value="1000" aria-label="Бюджет задачи в рублях">
+        <div class="calc-minmax"><span>100 ₽</span><span>10 000 ₽</span></div>
+        <div class="calc-presets">
+          <button class="preset" type="button" data-val="500">500 ₽</button>
+          <button class="preset" type="button" data-val="1000">1 000 ₽</button>
+          <button class="preset" type="button" data-val="2000">2 000 ₽</button>
+          <button class="preset" type="button" data-val="5000">5 000 ₽</button>
+        </div>
+        <div style="margin-top:var(--space-6)">
+          <div class="calc-row">
+            <span class="label">Комиссия платформы (10%)</span>
+            <span class="val" id="fee">100 ₽</span>
+          </div>
+          <div class="calc-row total">
+            <span class="label">Исполнитель получает</span>
+            <span class="val" id="payout">900 ₽</span>
+          </div>
+          <p class="compare-note" style="margin-top:var(--space-6)">Сейчас платформа работает в демо-режиме: при регистрации начисляются 5 000 демо-рублей — виртуальный баланс для тестирования сделок.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ДЛЯ КОГО -->
+<section class="sec" id="audience">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="kicker">Целевая аудитория</span>
+      <h2 class="sec-title">Для кого создана платформа</h2>
+      <p class="sec-sub">Дело создано для всех людей — в том числе школьников. Самый красивый апгрейд вашей подработки.</p>
+    </div>
+    <div class="audience-grid">
+      <div class="panel aud-card reveal">
+        <span class="aud-emoji" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg></span>
+        <h3>Школьники от 14 лет</h3>
+        <p>Первый заработок без срыва учёбы: небольшие поручения рядом с домом, в свободные от занятий часы.</p>
+      </div>
+      <div class="panel aud-card reveal">
+        <span class="aud-emoji" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+        <h3>Студенты и взрослые</h3>
+        <p>Гибкая подработка между парами или основной работой — а также возможность делегировать свои дела.</p>
+      </div>
+      <div class="panel aud-card reveal">
+        <span class="aud-emoji" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></span>
+        <h3>Заказчики</h3>
+        <p>Оперативная помощь с бытовыми, курьерскими и простыми цифровыми задачами — быстро и по фиксированной цене.</p>
+      </div>
+    </div>
+    <p class="audience-note">
+      Подростки 14–17 лет работают с учётом требований законодательства о занятости несовершеннолетних (согласие родителей и ограничения по виду занятости) — платформа создана, чтобы первый заработок был безопасным.
+    </p>
+  </div>
+</section>
+
+<!-- КОМАНДА -->
+<section class="sec" id="team">
+  <div class="wrap">
+    <div class="panel team-panel reveal">
+      <span class="kicker" style="justify-content:center">Наша команда</span>
+      <h2>Пятеро, которым не всё равно</h2>
+      <p class="lead">
+        «Дело» создала команда из <b>5 человек</b>, и всем нам от <b>15 до 16 лет</b>.
+        Мы сами придумали и делаем продукт: от дизайна и кода до нейросети, которая подбирает задачи.
+        Различные задачи, которые решает платформа, — тоже наша ежедневная работа: мы развиваем сервис сами.
       </p>
-
-      <a href="https://neverson1gq-oss.github.io/podrabotka/" class="btn-accent inline-flex items-center justify-center gap-2 px-10 py-4 rounded-xl font-extrabold text-base">
-        <span>Перейти на сайт</span>
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
+      <div class="avatars" aria-hidden="true">
+        <span class="avatar">Д</span>
+        <span class="avatar">Е</span>
+        <span class="avatar">Л</span>
+        <span class="avatar">О</span>
+        <span class="avatar">5</span>
+      </div>
+      <div class="team-facts">
+        <span class="team-fact">5 человек в команде</span>
+        <span class="team-fact">возраст 15–16 лет</span>
+        <span class="team-fact">дизайн, код и нейросеть — своими руками</span>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ФУТЕР -->
-  <footer class="w-full border-t border-[#E3D7C7] py-6 bg-[#F5EFE6]">
-    <div class="max-w-5xl mx-auto px-4 text-center text-xs text-[#7A6C6B]">
-      © Дело — сервис поиска подработки и задач.
+<!-- ПРИЗЫВ -->
+<section class="cta">
+  <div class="wrap reveal">
+    <h2>Своё дело ближе, <em>чем кажется</em></h2>
+    <p>Опубликуйте первое задание или найдите подработку на сегодня.</p>
+    <a class="btn btn-gold btn-lg" href="https://neverson1gq-oss.github.io/podrabotka/">
+      Перейти на сайт
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <p class="compare-note" style="margin-top:var(--space-6)">При регистрации начисляются 5 000 демо-рублей — виртуальный баланс для знакомства с платформой.</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ФУТЕР -->
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark" style="width:34px;height:34px;font-size:1.1rem" aria-hidden="true">Д</span>
+      <span>Дело</span>
     </div>
-  </footer>
+    <div class="footer-links">
+      <a href="https://neverson1gq-oss.github.io/podrabotka/">Перейти на сайт</a>
+      <a href="#compare">Сравнение</a>
+      <a href="#team">Команда</a>
+    </div>
+    <span class="footer-note">© 2026 Дело — сервис задач и подработки. Для всех, включая подростков от 14 лет.</span>
+  </div>
+</footer>
 
-</body>
+<script>
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Reveal on scroll */
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !reduced) {
+    var ro = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function (el) { ro.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  /* Survey bars */
+  var bars = document.querySelectorAll('.bar-fill');
+  function fillBars() {
+    bars.forEach(function (b) { b.style.width = b.getAttribute('data-w') + '%'; });
+  }
+  if ('IntersectionObserver' in window && !reduced) {
+    var bo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { fillBars(); bo.disconnect(); }
+      });
+    }, { threshold: 0.3 });
+    if (bars.length) bo.observe(bars[0].closest('.panel'));
+  } else {
+    bars.forEach(function (b) { b.style.width = b.getAttribute('data-w') + '%'; });
+  }
+
+  /* Counters */
+  function animateCounter(el) {
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    var suffix = el.getAttribute('data-suffix') || '';
+    if (reduced || !('requestAnimationFrame' in window)) { el.textContent = target + suffix; return; }
+    var start = null, dur = 1300;
+    function step(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var counters = document.querySelectorAll('.counter');
+  if ('IntersectionObserver' in window && !reduced) {
+    var co = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { animateCounter(e.target); co.unobserve(e.target); }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function (el) { co.observe(el); });
+  } else {
+    counters.forEach(function (el) { el.textContent = el.getAttribute('data-count') + (el.getAttribute('data-suffix') || ''); });
+  }
+
+  /* Benefits tabs */
+  var tabs = document.querySelectorAll('.tab');
+  function selectTab(tab) {
+    tabs.forEach(function (t) {
+      var sel = t === tab;
+      t.setAttribute('aria-selected', sel ? 'true' : 'false');
+      var panel = document.getElementById(t.getAttribute('aria-controls'));
+      if (panel) panel.hidden = !sel;
+    });
+  }
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () { selectTab(t); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        var i = Array.prototype.indexOf.call(tabs, t);
+        selectTab(tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]);
+        var nt = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+        nt.focus();
+      }
+    });
+  });
+
+  /* Calculator */
+  var slider = document.getElementById('budget');
+  var feeEl = document.getElementById('fee');
+  var payoutEl = document.getElementById('payout');
+  function fmt(n) { return n.toLocaleString('ru-RU') + ' ₽'; }
+  function updateCalc() {
+    var v = parseInt(slider.value, 10);
+    var pct = ((v - 100) / (10000 - 100)) * 100;
+    slider.style.setProperty('--fill', pct + '%');
+    feeEl.textContent = fmt(Math.round(v * 0.1));
+    payoutEl.textContent = fmt(Math.round(v * 0.9));
+    document.querySelectorAll('.preset').forEach(function (p) {
+      p.style.borderColor = parseInt(p.getAttribute('data-val'), 10) === v ? 'var(--accent)' : '';
+    });
+  }
+  if (slider) {
+    slider.addEventListener('input', updateCalc);
+    document.querySelectorAll('.preset').forEach(function (p) {
+      p.addEventListener('click', function () {
+        slider.value = p.getAttribute('data-val');
+        updateCalc();
+      });
+    });
+    updateCalc();
+  }
+})();
+</script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  const DEFAULT_LINE_HEIGHT = 16;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  const PICK_CAPABILITIES = ["pick"];
+  const PICK_CHAIN_LENGTH = 4;
+  const PICK_MAX_TEXT_CHARS = 120;
+  const PICK_MAX_HTML_CHARS = 300;
+
+  function truncate(value, maxChars) {
+    return value.length > maxChars ? value.slice(0, maxChars - 1) + "…" : value;
+  }
+
+  function isPickableElement(element) {
+    return (
+      element instanceof Element &&
+      element !== document.documentElement &&
+      element !== document.body
+    );
+  }
+
+  function resolvePickTarget(x, y) {
+    if (!Number.isFinite(x) || !Number.isFinite(y)) return null;
+    const element = document.elementFromPoint(x, y);
+    return isPickableElement(element) ? element.closest("svg") || element : null;
+  }
+
+  function pickLabel(element) {
+    if (element.id) return element.localName + "#" + element.id;
+    return [element.localName].concat(Array.from(element.classList).slice(0, 2)).join(".");
+  }
+
+  // Only attributes that help find the element in source. data-* values and URL
+  // query strings or fragments can carry tokens.
+  const PICK_ATTRIBUTES = new Set([
+    "id",
+    "class",
+    "name",
+    "type",
+    "role",
+    "alt",
+    "aria-label",
+    "href",
+    "src",
+  ]);
+
+  function pickAttributeValue(attribute) {
+    return attribute.name === "href" || attribute.name === "src"
+      ? attribute.value.split(/[?#]/)[0]
+      : attribute.value;
+  }
+
+  function describePickElement(element) {
+    const chain = [];
+    for (
+      let current = element;
+      isPickableElement(current) && chain.length < PICK_CHAIN_LENGTH;
+      current = current.parentElement
+    ) {
+      chain.unshift(current);
+    }
+    const attributes = Array.from(element.attributes)
+      .filter((attribute) => PICK_ATTRIBUTES.has(attribute.name))
+      .map((attribute) => ` ${attribute.name}="${pickAttributeValue(attribute).replace(/"/g, "&quot;")}"`)
+      .join("");
+    const text = (element.innerText || element.textContent || "").replace(/\s+/g, " ").trim();
+    return {
+      chain: chain.map(pickLabel),
+      html: truncate(`<${element.localName}${attributes}>`, PICK_MAX_HTML_CHARS),
+      text: text ? truncate(text, PICK_MAX_TEXT_CHARS) : undefined,
+    };
+  }
+
+  // Hover asks once per frame, and innerText on a large section forces layout,
+  // so only the rect is re-read while the pointer stays on the same element.
+  // Clicks ask for fresh details since the page may have changed the element.
+  let lastPick = null;
+
+  function describePickTarget(element, fresh) {
+    if (fresh || lastPick?.element !== element) {
+      lastPick = { element, details: describePickElement(element) };
+    }
+    const rect = element.getBoundingClientRect();
+    return {
+      rect: { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
+      ...lastPick.details,
+    };
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+      capabilities: PICK_CAPABILITIES,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_PICK") {
+      const element = resolvePickTarget(event.data.x, event.data.y);
+      postToTrustedTop({
+        type: "INLINE_EDIT_PICK_RESULT",
+        seq: event.data.seq,
+        target: element ? describePickTarget(element, event.data.fresh === true) : null,
+      });
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_BY") {
+      const { deltaX, deltaY, deltaMode } = event.data;
+      if (!scrollForwarding || !Number.isFinite(deltaX) || !Number.isFinite(deltaY)) return;
+      if (deltaMode !== 0 && deltaMode !== 1 && deltaMode !== 2) return;
+      const lineHeight =
+        parseFloat(getComputedStyle(document.documentElement).lineHeight) || DEFAULT_LINE_HEIGHT;
+      const scaleX = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerWidth : 1;
+      const scaleY = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerHeight : 1;
+      // The selection overlay receives the wheel event instead of this iframe.
+      // Instant scrolling preserves trackpad deltas even on smooth-scroll sites.
+      window.scrollBy({ left: deltaX * scaleX, top: deltaY * scaleY, behavior: "instant" });
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
 </html>
